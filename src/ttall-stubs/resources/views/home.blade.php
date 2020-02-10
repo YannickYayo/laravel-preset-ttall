@@ -1,27 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex items-center">
-        <div class="md:w-1/2 md:mx-auto">
+    <div class="mx-2 md:w-1/2 md:mx-auto">
 
-            @if (session('status'))
-                <div class="text-sm border border-t-8 rounded text-green-700 border-green-600 bg-green-100 px-3 py-4 mb-4" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            <div class="flex flex-col break-words bg-white border border-2 rounded shadow-md">
-
-                <div class="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
-                    Dashboard
-                </div>
-
-                <div class="w-full p-6">
-                    <p class="text-gray-700">
-                        You are logged in!
-                    </p>
-                </div>
+        @if (session('status'))
+            <div class="p-4 mb-4 text-green-700 bg-green-100 border-l-4 border-green-500 shadow-sm" role="alert">
+                {{ session('status') }}
             </div>
+        @endif
+
+        <div class="bg-white border-2 rounded shadow-sm">
+            <div class="px-6 py-3 mb-0 font-semibold text-gray-700 bg-gray-200">
+                Dashboard
+            </div>
+
+            <p class="p-6 text-gray-700">
+                You are logged in!
+            </p>
         </div>
     </div>
 @endsection

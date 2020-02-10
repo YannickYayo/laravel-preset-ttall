@@ -13,45 +13,46 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none">
+<body class="h-screen antialiased leading-none bg-gray-100">
 <div class="flex flex-col">
     @if(Route::has('login'))
         <div class="absolute top-0 right-0 mt-4 mr-4">
             @auth
-                <a href="{{ url('/home') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Home') }}</a>
+                <a href="{{ url('/home') }}" class="text-sm font-normal text-teal-800 no-underline uppercase hover:underline">{{ __('Home') }}</a>
             @else
-                <a href="{{ route('login') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase pr-6">{{ __('Login') }}</a>
+                <a href="{{ route('login') }}" class="pr-6 text-sm font-normal text-teal-800 no-underline uppercase hover:underline">{{ __('Login') }}</a>
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Register') }}</a>
+                    <a href="{{ route('register') }}" class="text-sm font-normal text-teal-800 no-underline uppercase hover:underline">{{ __('Register') }}</a>
                 @endif
             @endauth
         </div>
     @endif
 
-    <div class="min-h-screen flex items-center justify-center">
+    <div class="flex items-center justify-center min-h-screen">
         <div class="flex flex-col justify-around h-full">
             <div>
-                <h1 class="text-gray-600 text-center font-light tracking-wider text-5xl mb-6">
-                    {{ config('app.name', 'Laravel') }}
+                <h1 class="mb-6 text-5xl font-light tracking-wider text-center text-gray-600">
+                    TTALL Stack
                 </h1>
+                <p class="mb-8 text-base font-normal text-center text-gray-700">Tailwind | Turbolinks | Alpinejs | Laravel | Livewire</p>
                 <ul class="list-reset">
                     <li class="inline pr-8">
-                        <a href="https://laravel.com/docs" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Documentation">Documentation</a>
+                        <a href="https://laravel.com/docs" class="text-sm font-normal text-teal-800 no-underline uppercase hover:underline" title="Documentation">Documentation</a>
                     </li>
                     <li class="inline pr-8">
-                        <a href="https://laracasts.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Laracasts">Laracasts</a>
+                        <a href="https://laracasts.com" class="text-sm font-normal text-teal-800 no-underline uppercase hover:underline" title="Laracasts">Laracasts</a>
                     </li>
                     <li class="inline pr-8">
-                        <a href="https://laravel-news.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="News">News</a>
+                        <a href="https://laravel-news.com" class="text-sm font-normal text-teal-800 no-underline uppercase hover:underline" title="News">News</a>
                     </li>
                     <li class="inline pr-8">
-                        <a href="https://nova.laravel.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Nova">Nova</a>
+                        <a href="https://nova.laravel.com" class="text-sm font-normal text-teal-800 no-underline uppercase hover:underline" title="Nova">Nova</a>
                     </li>
                     <li class="inline pr-8">
-                        <a href="https://forge.laravel.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Forge">Forge</a>
+                        <a href="https://forge.laravel.com" class="text-sm font-normal text-teal-800 no-underline uppercase hover:underline" title="Forge">Forge</a>
                     </li>
                     <li class="inline pr-8">
-                        <a href="https://github.com/laravel/laravel" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="GitHub">GitHub</a>
+                        <a href="https://github.com/laravel/laravel" class="text-sm font-normal text-teal-800 no-underline uppercase hover:underline" title="GitHub">GitHub</a>
                     </li>
                 </ul>
             </div>

@@ -1,7 +1,7 @@
-const mix = require("laravel-mix");
+const mix = require('laravel-mix');
 
-require("laravel-mix-tailwind");
-require("laravel-mix-purgecss");
+require('laravel-mix-tailwind');
+require('laravel-mix-purgecss');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,13 +14,13 @@ require("laravel-mix-purgecss");
  |
  */
 
-mix
-  .js("resources/js/app.js", "public/js")
-  .postCss("resources/css/app.css", "public/css")
-  .tailwind("./tailwind.config.js")
-  .version()
-  .sourceMaps();
+mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/turbolinks.js', 'public/js')
+    .postCss('resources/css/app.css', 'public/css')
+    .tailwind('./tailwind.config.js')
+    .version()
+    .sourceMaps();
 
 if (mix.inProduction()) {
-  mix.purgeCss();
+    mix.purgeCss();
 }
