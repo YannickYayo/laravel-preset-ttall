@@ -101,7 +101,8 @@ class TtallPreset extends Preset
                 "Illuminate\\Foundation\\ComposerScripts::postUpdate",
                 "@php artisan ide-helper:generate",
                 "@php artisan ide-helper:models -W"
-            ]
+            ],
+            "format" => "php-cs-fixer fix --path-mode=intersection --config=.php_cs ./"
         ], $composer);
     }
 
