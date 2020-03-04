@@ -4,13 +4,13 @@ namespace YannickYayo\TtallPreset;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\Console\PresetCommand;
+use Laravel\Ui\UiCommand;
 
 class TtallPresetServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        PresetCommand::macro('ttall', function ($command) {
+        UiCommand::macro('ttall', function ($command) {
             TtallPreset::install();
 
             $command->info('Ttall scaffolding installed successfully.');
@@ -19,7 +19,8 @@ class TtallPresetServiceProvider extends ServiceProvider
             $command->info('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
         });
 
-        PresetCommand::macro('ttall-auth', function ($command) {
+        UiCommand::macro('ttall-auth', function ($command) {
+            $command->call('ui:auth');
             TtallPreset::installAuth();
 
             $command->info('Ttall scaffolding with auth views installed successfully.');
