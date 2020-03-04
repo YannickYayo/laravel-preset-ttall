@@ -1,8 +1,14 @@
-# Laravel 6.0+ Frontend preset for The TTALL Stack
+# Laravel 7.0+ Frontend preset for The TTALL Stack
 
 An opiniated Laravel front-end scaffolding preset for TTALL stack - Taiwlindcss | Turbolinks | Alpinejs | Laravel | Livewire.
 <br>
-It comes with usefull packages and configurations :
+
+### For Laravel < 7.0, please use the [1.x branch](https://github.com/YannickYayo/laravel-preset-ttall/tree/1.x)!
+
+Some features when using `php artisan preset ttall` without the auth scaffolding was missing, if you have issues, please tell me.
+
+<br>
+It comes with usefull packages and their configurations files :
 
 - Laravel debugbar
 - Laravel IDE Helper
@@ -13,12 +19,12 @@ It comes with usefull packages and configurations :
 
 ## 1. Usage
 
-1. Fresh install Laravel >= 6.0 and `cd` to your app.
+1. Fresh install Laravel >= 7.0 and `cd` to your app.
 2. Install this preset via `composer require yannickyayo/laravel-preset-ttall --dev`. Laravel will automatically discover this package. No need to register the service provider.
 
 ### a. For Presets without Authentication
 
-1. Use `php artisan preset ttall` for the basic preset
+1. Use `php artisan ui ttall` for the basic preset
 2. `composer update`
 3. `php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"` to publish the Laravel Debugbar's config file
 4. `npm install && npm run dev`
@@ -26,7 +32,7 @@ It comes with usefull packages and configurations :
 
 ### b. For Presets with Authentication
 
-1. Use `php artisan preset ttall-auth` for the basic preset, auth route entry and auth views in one go. (NOTE: If you run this command several times, be sure to clean up the duplicate Auth entries in `routes/web.php`)
+1. Use `php artisan ui ttall-auth` for the basic preset, auth route entry and auth views in one go. (NOTE: If you run this command several times, be sure to clean up the duplicate Auth entries in `routes/web.php`)
 2. `composer update`
 3. `php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"` to publish the Laravel Debugbar's config file
 4. `npm install && npm run dev`
@@ -71,10 +77,11 @@ A composer's script is added automatically to tell `Laravel IDE Helper` to resca
 
 Scripts are also added to your `package.json` and `composer.json` to run specific actions :
 
-- `composer format` : will use `php-cs-fixer` to format
-  your php files
+- `composer format` : will use `php-cs-fixer` to format your php files
+- `composer test` : will use the `php artisan test` command to run your phpunit tests
+- `composer analyse` : will use `larastan` to analyse your code
 - `npm run format` : will format your js files on `resources/js` folder
-- `npm run lint` : will find issues in your js files based on Airbnb's rules
+- `npm run lint` : will find issues in your js files based on Airbnb's rules and try to fix issues
 
 ### Screenshots
 
