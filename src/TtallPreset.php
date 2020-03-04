@@ -114,7 +114,7 @@ class TtallPreset extends Preset
     {
         return array_merge([
             "format" => "prettier --write 'resources/js/*.{js,jsx}'",
-            "lint" => "eslint '**/*.{js,jsx}' --quiet"
+            "lint" => "eslint '**/*.{js,jsx}' --quiet --fix"
         ], $packages);
     }
 
@@ -201,7 +201,7 @@ class TtallPreset extends Preset
                 'barryvdh/laravel-debugbar' => '^3.2',
                 'barryvdh/laravel-ide-helper' => '^2.6',
                 'friendsofphp/php-cs-fixer' => '^2.16',
-                'nunomaduro/larastan' => '^0.5.1',
+                'nunomaduro/larastan' => '^0.5.2',
             ], $composer);
         } else {
             return array_merge([
