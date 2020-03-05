@@ -2,14 +2,16 @@
 
 namespace YannickYayo\TtallPreset;
 
-use Illuminate\Support\Arr;
-use Laravel\Ui\Presets\Preset;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Laravel\Ui\Presets\Preset;
+use Symfony\Component\Finder\SplFileInfo;
 
 class TtallPreset extends Preset
 {
     /**
-     * Installation without auth scaffolding
+     * Installation without auth scaffolding.
      */
     public static function install(): void
     {
@@ -28,16 +30,17 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Installation with auth scaffolding
+     * Installation with auth scaffolding.
      */
-    public static function installAuth()
+    public static function installAuth(): void
     {
         static::install();
+        static::scaffoldController();
         static::scaffoldAuth();
     }
 
     /**
-     * Update the "composer.json" file scripts key
+     * Update the "composer.json" file scripts key.
      */
     protected static function updateComposerScripts(): void
     {
@@ -60,7 +63,7 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Merging the composer "scripts" key
+     * Merging the composer "scripts" key.
      *
      * @param array $composer
      *
@@ -69,19 +72,19 @@ class TtallPreset extends Preset
     protected static function updateComposerScriptsArray(array $composer): array
     {
         return array_merge([
-            "post-update-cmd" => [
-                "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-                "@php artisan ide-helper:generate",
-                "@php artisan ide-helper:models -W"
+            'post-update-cmd' => [
+                'Illuminate\\Foundation\\ComposerScripts::postUpdate',
+                '@php artisan ide-helper:generate',
+                '@php artisan ide-helper:models -W',
             ],
-            "format" => "php-cs-fixer fix --path-mode=intersection --config=.php_cs ./",
-            "test" => "@php artisan test",
-            "analyse" => "phpstan analyse"
+            'format' => 'php-cs-fixer fix --path-mode=intersection --config=.php_cs ./',
+            'test' => '@php artisan test',
+            'analyse' => 'phpstan analyse',
         ], $composer);
     }
 
     /**
-     * Update the "package.json" file scripts key
+     * Update the "package.json" file scripts key.
      */
     protected static function updatePackagesScripts(): void
     {
@@ -104,7 +107,7 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Merging the package "scripts" key
+     * Merging the package "scripts" key.
      *
      * @param array $packages
      *
@@ -113,13 +116,13 @@ class TtallPreset extends Preset
     protected static function updatePackagesScriptsArray(array $packages): array
     {
         return array_merge([
-            "format" => "prettier --write 'resources/js/*.{js,jsx}'",
-            "lint" => "eslint '**/*.{js,jsx}' --quiet --fix"
+            'format' => "prettier --write 'resources/js/*.{js,jsx}'",
+            'lint' => "eslint '**/*.{js,jsx}' --quiet --fix",
         ], $packages);
     }
 
     /**
-     * Merging packages from package.json
+     * Merging packages from package.json.
      *
      * @param array $packages
      * @param string $dev
@@ -187,7 +190,7 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Updat packages from composer.json
+     * Updat packages from composer.json.
      *
      * @param array $composer
      * @param string $dev
@@ -211,7 +214,7 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Update resources/css/app.css
+     * Update resources/css/app.css.
      */
     protected static function updateStyles(): void
     {
@@ -229,7 +232,7 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Update webpack.mix.js and resources/js/bootstrap.js
+     * Update webpack.mix.js and resources/js/bootstrap.js.
      */
     protected static function updateBootstrapping(): void
     {
@@ -240,7 +243,7 @@ class TtallPreset extends Preset
         copy(__DIR__.'/ttall-stubs/resources/js/app.js', resource_path('js/app.js'));
         copy(__DIR__.'/ttall-stubs/resources/js/turbolinks.js', resource_path('js/turbolinks.js'));
         copy(__DIR__.'/ttall-stubs/resources/js/bootstrap.js', resource_path('js/bootstrap.js'));
-        
+
         copy(__DIR__.'/ttall-stubs/.eslintignore', base_path('.eslintignore'));
         copy(__DIR__.'/ttall-stubs/.eslintrc.json', base_path('.eslintrc.json'));
         copy(__DIR__.'/ttall-stubs/.prettierrc', base_path('.prettierrc'));
@@ -249,7 +252,7 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Update the welcome.blade.php file
+     * Update the welcome.blade.php file.
      */
     protected static function updateWelcomePage(): void
     {
@@ -259,7 +262,7 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Update the pagination views
+     * Update the pagination views.
      */
     protected static function updatePagination(): void
     {
@@ -269,7 +272,7 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Update the app layout
+     * Update the app layout.
      */
     protected static function updateLayout(): void
     {
@@ -279,7 +282,27 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Scaffold auth system
+     * Scaffold Auth controllers.
+     */
+    protected static function scaffoldController(): void
+    {
+        if (! is_dir($directory = app_path('Http/Controllers/Auth'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        $filesystem = new Filesystem;
+
+        collect($filesystem->allFiles(base_path('vendor/laravel/ui/stubs/Auth')))
+            ->each(function (SplFileInfo $file) use ($filesystem) {
+                $filesystem->copy(
+                    $file->getPathname(),
+                    app_path('Http/Controllers/Auth/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
+                );
+            });
+    }
+
+    /**
+     * Scaffold auth system.
      */
     protected static function scaffoldAuth(): void
     {
@@ -295,7 +318,7 @@ class TtallPreset extends Preset
     }
 
     /**
-     * Update HomeController.stub namespace
+     * Update HomeController.stub namespace.
      */
     protected static function compileControllerStub(): string
     {
