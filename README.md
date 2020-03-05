@@ -5,9 +5,10 @@ An opiniated Laravel front-end scaffolding preset for TTALL stack - Taiwlindcss 
 
 ### For Laravel < 7.0, please use the [1.x branch](https://github.com/YannickYayo/laravel-preset-ttall/tree/1.x)!
 
-Some features when using `php artisan preset ttall` without the auth scaffolding was missing, if you have issues, please tell me.
+Some features when using `php artisan preset ttall` without the auth scaffolding was missing, currently working on it !
 
-<br>
+<hr>
+
 It comes with usefull packages and their configurations files :
 
 - Laravel debugbar
@@ -32,7 +33,7 @@ It comes with usefull packages and their configurations files :
 
 ### b. For Presets with Authentication
 
-1. Use `php artisan ui ttall-auth` for the basic preset, auth route entry and auth views in one go. (NOTE: If you run this command several times, be sure to clean up the duplicate Auth entries in `routes/web.php`)
+1. Use `php artisan ui ttall --auth` for the basic preset, auth route entry and auth views in one go. (NOTE: If you run this command several times, be sure to clean up the duplicate Auth entries in `routes/web.php`)
 2. `composer update`
 3. `php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"` to publish the Laravel Debugbar's config file
 4. `npm install && npm run dev`

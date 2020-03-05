@@ -8,9 +8,9 @@
   ],
   "license": "MIT",
   "require": {
-    "illuminate/support": "^7.0",
-    "illuminate/pagination": "^7.0",
     "illuminate/filesystem": "^7.0",
+    "illuminate/pagination": "^7.0",
+    "illuminate/support": "^7.0",
     "laravel/ui": "^2.0"
   },
   "autoload": {

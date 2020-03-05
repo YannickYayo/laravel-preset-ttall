@@ -2,9 +2,10 @@
 
 namespace YannickYayo\TtallPreset;
 
+use Laravel\Ui\UiCommand;
+use Laravel\Ui\AuthCommand;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Ui\UiCommand;
 
 class TtallPresetServiceProvider extends ServiceProvider
 {
@@ -13,20 +14,19 @@ class TtallPresetServiceProvider extends ServiceProvider
         UiCommand::macro('ttall', function ($command) {
             TtallPreset::install();
 
-            $command->info('Ttall scaffolding installed successfully.');
-            $command->info('Please run "composer update" to install the new composer\'s packages.');
-            $command->info('Please run "php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"" to publish Laravel Debugbar\'s config.');
-            $command->info('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+            $command->comment('Ttall scaffolding installed successfully.');
+            $command->comment('Please run "composer update" to install the new composer\'s packages.');
+            $command->comment('Please run "php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"" to publish Laravel Debugbar\'s config.');
+            $command->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
         });
 
-        UiCommand::macro('ttall-auth', function ($command) {
-            $command->call('ui:auth');
+        AuthCommand::macro('ttall', function ($command) {
             TtallPreset::installAuth();
 
-            $command->info('Ttall scaffolding with auth views installed successfully.');
-            $command->info('Please run "composer update" to install the new composer\'s packages.');
-            $command->info('Please run "php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"" to publish Laravel Debugbar\'s config.');
-            $command->info('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+            $command->comment('Ttall scaffolding with auth views installed successfully.');
+            $command->comment('Please run "composer update" to install the new composer\'s packages.');
+            $command->comment('Please run "php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"" to publish Laravel Debugbar\'s config.');
+            $command->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
         });
 
         Paginator::defaultView('pagination::default');
