@@ -2,10 +2,10 @@
 
 namespace YannickYayo\TtallPreset;
 
-use Laravel\Ui\UiCommand;
-use Laravel\Ui\AuthCommand;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Ui\AuthCommand;
+use Laravel\Ui\UiCommand;
 
 class TtallPresetServiceProvider extends ServiceProvider
 {

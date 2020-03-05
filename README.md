@@ -82,7 +82,7 @@ Scripts are also added to your `package.json` and `composer.json` to run specifi
 - `composer test` : will use the `php artisan test` command to run your phpunit tests
 - `composer analyse` : will use `larastan` to analyse your code
 - `npm run format` : will format your js files on `resources/js` folder
-- `npm run lint` : will find issues in your js files based on Airbnb's rules and try to fix issues
+- `npm run lint` : will find issues in your js files based on Airbnb's rules and try to fix them
 
 ### Screenshots
 
