@@ -41,8 +41,8 @@ It comes with usefull packages and their configurations files :
 
 ### Config
 
-The default `tailwind.config.js` configuration file included by this package is including the `Inter` font family. Should you wish to make changes, you should remove the file and run `node_modules/.bin/tailwind init`, which will generate a fresh configuration file for you, which you are free to change to suit your needs.<br>
-The `Inter` font family is included in your `resources/css/app.css` file.
+The default `tailwind.config.js` configuration file included by this package is including the `Inter` font family. You should wish to make changes by removing the file and run `node_modules/.bin/tailwind init`, which will generate a fresh configuration file for you, which you are free to change to suit your needs.<br>
+The `Inter` font family is included in your `resources/layouts/app.blade.php` file.
 
 Add a new i18n string in the `resources/lang/XX/pagination.php` file for each language that your app uses:
 
