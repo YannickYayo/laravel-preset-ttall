@@ -1,9 +1,13 @@
+/* eslint-disable global-require */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
     theme: {
-        fontFamily: {
-            inter: ['inter', 'sans-serif']
-        },
-        extend: {}
+        extend: {
+            fontFamily: {
+                sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+            }
+        }
     },
     variants: {},
     plugins: []
