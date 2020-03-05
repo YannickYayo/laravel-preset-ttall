@@ -3,8 +3,10 @@
 namespace YannickYayo\TtallPreset;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Laravel\Ui\Presets\Preset;
 use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\Finder\SplFileInfo;
 
 class TtallPreset extends Preset
 {
@@ -30,9 +32,10 @@ class TtallPreset extends Preset
     /**
      * Installation with auth scaffolding
      */
-    public static function installAuth()
+    public static function installAuth(): void
     {
         static::install();
+        static::scaffoldController();
         static::scaffoldAuth();
     }
 
@@ -276,6 +279,26 @@ class TtallPreset extends Preset
         (new Filesystem)->delete(resource_path('views/vendor/paginate'));
 
         (new Filesystem)->copyDirectory(__DIR__.'/ttall-stubs/resources/views/vendor/pagination', resource_path('views/vendor/pagination'));
+    }
+
+    /**
+     * Scaffold Auth controllers
+     */
+    protected static function scaffoldController(): void
+    {
+        if (! is_dir($directory = app_path('Http/Controllers/Auth'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        $filesystem = new Filesystem;
+
+        collect($filesystem->allFiles(base_path('vendor/laravel/ui/stubs/Auth')))
+            ->each(function (SplFileInfo $file) use ($filesystem) {
+                $filesystem->copy(
+                    $file->getPathname(),
+                    app_path('Http/Controllers/Auth/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
+                );
+            });
     }
 
     /**
