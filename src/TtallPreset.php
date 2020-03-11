@@ -266,9 +266,9 @@ class TtallPreset extends Preset
      */
     protected static function updatePagination(): void
     {
-        (new Filesystem)->delete(resource_path('views/layouts'));
+        (new Filesystem)->delete(resource_path('views/vendor/paginate'));
 
-        (new Filesystem)->copyDirectory(__DIR__.'/ttall-stubs/resources/views/layouts', resource_path('views/layouts'));
+        (new Filesystem)->copyDirectory(__DIR__.'/ttall-stubs/resources/views/vendor/pagination', resource_path('views/vendor/pagination'));
     }
 
     /**
@@ -276,9 +276,9 @@ class TtallPreset extends Preset
      */
     protected static function updateLayout(): void
     {
-        (new Filesystem)->delete(resource_path('views/vendor/paginate'));
+        (new Filesystem)->delete(resource_path('views/layouts'));
 
-        (new Filesystem)->copyDirectory(__DIR__.'/ttall-stubs/resources/views/vendor/pagination', resource_path('views/vendor/pagination'));
+        (new Filesystem)->copyDirectory(__DIR__.'/ttall-stubs/resources/views/layouts', resource_path('views/layouts'));
     }
 
     /**

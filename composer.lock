@@ -75,16 +75,16 @@
         },
         {
             "name": "illuminate/console",
-            "version": "v7.0.2",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/console.git",
-                "reference": "e096ea7c0c229a708d6f2e280eb99a312bf674b0"
+                "reference": "2a2b1f55e579828dafa6914473feafe61a6d66e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/console/zipball/e096ea7c0c229a708d6f2e280eb99a312bf674b0",
-                "reference": "e096ea7c0c229a708d6f2e280eb99a312bf674b0",
+                "url": "https://api.github.com/repos/illuminate/console/zipball/2a2b1f55e579828dafa6914473feafe61a6d66e2",
+                "reference": "2a2b1f55e579828dafa6914473feafe61a6d66e2",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +96,7 @@
             },
             "suggest": {
                 "dragonmantank/cron-expression": "Required to use scheduling component (^2.0).",
-                "guzzlehttp/guzzle": "Required to use the ping methods on schedules (^6.3|^7.0).",
+                "guzzlehttp/guzzle": "Required to use the ping methods on schedules (^6.3.1|^7.0).",
                 "illuminate/filesystem": "Required to use the generator command (^7.0)"
             },
             "type": "library",
@@ -122,20 +122,20 @@
             ],
             "description": "The Illuminate Console package.",
             "homepage": "https://laravel.com",
-            "time": "2020-02-15T17:17:37+00:00"
+            "time": "2020-03-08T15:24:43+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.0.2",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "4e885c85fba40946f75167a2b2ac7902aeb2f2d7"
+                "reference": "10eb9fd5014e80296d254ae38ff1afe52d515a66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/4e885c85fba40946f75167a2b2ac7902aeb2f2d7",
-                "reference": "4e885c85fba40946f75167a2b2ac7902aeb2f2d7",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/10eb9fd5014e80296d254ae38ff1afe52d515a66",
+                "reference": "10eb9fd5014e80296d254ae38ff1afe52d515a66",
                 "shasum": ""
             },
             "require": {
@@ -166,11 +166,11 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2020-02-28T16:28:59+00:00"
+            "time": "2020-03-09T13:23:43+00:00"
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v7.0.2",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
@@ -223,7 +223,7 @@
         },
         {
             "name": "illuminate/pagination",
-            "version": "v7.0.2",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pagination.git",
@@ -268,16 +268,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v7.0.2",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "8cd2b6071e6e9d796ce0aa7c341f0c3cd41ba648"
+                "reference": "fdbe1f88a9118ab26aa2e414640cd92f9e2aefdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/8cd2b6071e6e9d796ce0aa7c341f0c3cd41ba648",
-                "reference": "8cd2b6071e6e9d796ce0aa7c341f0c3cd41ba648",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/fdbe1f88a9118ab26aa2e414640cd92f9e2aefdf",
+                "reference": "fdbe1f88a9118ab26aa2e414640cd92f9e2aefdf",
                 "shasum": ""
             },
             "require": {
@@ -326,7 +326,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-03-03T19:28:55+00:00"
+            "time": "2020-03-10T13:45:36+00:00"
         },
         {
             "name": "laravel/ui",
@@ -1035,16 +1035,16 @@
         },
         {
             "name": "voku/portable-ascii",
-            "version": "1.4.8",
+            "version": "1.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/voku/portable-ascii.git",
-                "reference": "a3801f5facf187a28cc2cae7b98a540c36406dc4"
+                "reference": "9fd2b224c71448b5f84aef9d499a1428d79776a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/voku/portable-ascii/zipball/a3801f5facf187a28cc2cae7b98a540c36406dc4",
-                "reference": "a3801f5facf187a28cc2cae7b98a540c36406dc4",
+                "url": "https://api.github.com/repos/voku/portable-ascii/zipball/9fd2b224c71448b5f84aef9d499a1428d79776a2",
+                "reference": "9fd2b224c71448b5f84aef9d499a1428d79776a2",
                 "shasum": ""
             },
             "require": {
@@ -1080,7 +1080,7 @@
                 "clean",
                 "php"
             ],
-            "time": "2020-02-06T21:46:48+00:00"
+            "time": "2020-03-06T02:47:42+00:00"
         }
     ],
     "packages-dev": [

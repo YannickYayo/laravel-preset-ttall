@@ -5,8 +5,6 @@ An opiniated Laravel front-end scaffolding preset for TTALL stack - Taiwlindcss 
 
 ### For Laravel < 7.0, please use the [1.x branch](https://github.com/YannickYayo/laravel-preset-ttall/tree/1.x)!
 
-Some features when using `php artisan preset ttall` without the auth scaffolding was missing, currently working on it !
-
 <hr>
 
 It comes with usefull packages and their configurations files :
