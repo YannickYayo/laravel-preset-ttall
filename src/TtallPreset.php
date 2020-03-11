@@ -222,11 +222,11 @@ class TtallPreset extends Preset
      * Updat packages from composer.json.
      *
      * @param array $composer
-     * @param bool $dev
+     * @param string $dev
      *
      * @return array
      */
-    protected static function updateComposerPackageArray(array $composer, bool $dev): array
+    protected static function updateComposerPackageArray(array $composer, string $dev): array
     {
         if ($dev == 'require-dev') {
             return array_merge([
