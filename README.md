@@ -2,6 +2,11 @@
 
 An opiniated Laravel front-end scaffolding preset for TTALL stack - Taiwlindcss | Turbolinks | Alpinejs | Laravel | Livewire.
 <br>
+
+### For Laravel >= 7.0, please use the [3.x branch](https://github.com/YannickYayo/laravel-preset-ttall/tree/3.x)!
+
+<hr>
+
 It comes with usefull packages and configurations :
 
 - Laravel debugbar
@@ -34,8 +39,8 @@ It comes with usefull packages and configurations :
 
 ### Config
 
-The default `tailwind.config.js` configuration file included by this package is including the `Inter` font family. Should you wish to make changes, you should remove the file and run `node_modules/.bin/tailwind init`, which will generate a fresh configuration file for you, which you are free to change to suit your needs.<br>
-The `Inter` font family is included in your `resources/css/app.css` file.
+The default `tailwind.config.js` configuration file included by this package is including the `Inter` font family. You should wish to make changes by removing the file and run `node_modules/.bin/tailwind init`, which will generate a fresh configuration file for you, which you are free to change to suit your needs.<br>
+The `Inter` font family is included in your `resources/layouts/app.blade.php` file.
 
 Add a new i18n string in the `resources/lang/XX/pagination.php` file for each language that your app uses:
 
@@ -71,10 +76,11 @@ A composer's script is added automatically to tell `Laravel IDE Helper` to resca
 
 Scripts are also added to your `package.json` and `composer.json` to run specific actions :
 
-- `composer format` : will use `php-cs-fixer` to format
-  your php files
+- `composer format` : will use `php-cs-fixer` to format your php files
+- `composer test` : will use the `php artisan test` command to run your phpunit tests
+- `composer analyse` : will use `larastan` to analyse your code
 - `npm run format` : will format your js files on `resources/js` folder
-- `npm run lint` : will find issues in your js files based on Airbnb's rules
+- `npm run lint` : will find issues in your js files based on Airbnb's rules and try to fix them
 
 ### Screenshots
 
