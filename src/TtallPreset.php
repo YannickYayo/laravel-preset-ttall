@@ -23,6 +23,7 @@ class TtallPreset extends Preset
         static::updateBootstrapping();
         static::updateWelcomePage();
         static::updatePagination();
+        static::updateLayout();
         static::removeNodeModules();
     }
 
@@ -52,7 +53,7 @@ class TtallPreset extends Preset
 
         $packages[$configurationKey] = static::updatePackageArray(
             array_key_exists($configurationKey, $packages) ? $packages[$configurationKey] : [],
-            $dev
+            $configurationKey
         );
 
         ksort($packages[$configurationKey]);
@@ -102,6 +103,8 @@ class TtallPreset extends Preset
                 '@php artisan ide-helper:models -W',
             ],
             'format' => 'php-cs-fixer fix --path-mode=intersection --config=.php_cs ./',
+            'test' => 'phpunit --colors=always --stop-on-defect',
+            'analyse' => 'phpstan analyse',
         ], $composer);
     }
 
@@ -139,7 +142,7 @@ class TtallPreset extends Preset
     {
         return array_merge([
             'format' => "prettier --write 'resources/js/*.{js,jsx}'",
-            'lint' => "eslint '**/*.{js,jsx}' --quiet",
+            'lint' => "eslint '**/*.{js,jsx}' --quiet --fix",
         ], $packages);
     }
 
@@ -147,13 +150,13 @@ class TtallPreset extends Preset
      * Merging packages from package.json.
      *
      * @param array $packages
-     * @param bool $dev
+     * @param string $dev
      *
      * @return array
      */
-    protected static function updatePackageArray(array $packages, bool $dev): array
+    protected static function updatePackageArray(array $packages, string $dev): array
     {
-        if ($dev) {
+        if ($dev == 'devDependencies') {
             return array_merge([
                 'eslint' => '^6.8.0',
                 'eslint-config-airbnb' => '^18.0.1',
@@ -180,7 +183,7 @@ class TtallPreset extends Preset
                 'laravel-mix-tailwind' => '^0.1.0',
                 'lodash' => '^4.17.13',
                 'tailwindcss' => '^1.2',
-                'alpinejs' => '^1.9.7',
+                'alpinejs' => '^2.0',
                 'turbolinks' => '^5.2.0',
             ], $packages);
         }
@@ -204,7 +207,7 @@ class TtallPreset extends Preset
 
         $composer[$configurationKey] = static::updateComposerPackageArray(
             array_key_exists($configurationKey, $composer) ? $composer[$configurationKey] : [],
-            $dev
+            $configurationKey
         );
 
         ksort($composer[$configurationKey]);
@@ -225,7 +228,7 @@ class TtallPreset extends Preset
      */
     protected static function updateComposerPackageArray(array $composer, bool $dev): array
     {
-        if ($dev) {
+        if ($dev == 'require-dev') {
             return array_merge([
                 'barryvdh/laravel-debugbar' => '^3.2',
                 'barryvdh/laravel-ide-helper' => '^2.6',
@@ -234,7 +237,7 @@ class TtallPreset extends Preset
             ], $composer);
         } else {
             return array_merge([
-                'livewire/livewire' => '^0.7.0',
+                'livewire/livewire' => '^1.0',
             ], $composer);
         }
     }
@@ -255,6 +258,16 @@ class TtallPreset extends Preset
         });
 
         copy(__DIR__.'/ttall-stubs/resources/css/app.css', resource_path('css/app.css'));
+    }
+
+    /**
+     * Update the pagination views.
+     */
+    protected static function updateLayout(): void
+    {
+        (new Filesystem)->delete(resource_path('views/layouts'));
+
+        (new Filesystem)->copyDirectory(__DIR__.'/ttall-stubs/resources/views/layouts', resource_path('views/layouts'));
     }
 
     /**
