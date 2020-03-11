@@ -8,7 +8,11 @@
   ],
   "license": "MIT",
   "require": {
-    "laravel/framework": "^5.5 || ^6.0 || ^7.0"
+    "laravel/framework": "^5.5 || ^6.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.14",
+    "friendsofphp/php-cs-fixer": "^2.16"
   },
   "autoload": {
     "psr-4": {
@@ -21,5 +25,9 @@
         "YannickYayo\\TtallPreset\\TtallPresetServiceProvider"
       ]
     }
+  },
+  "scripts": {
+    "format": "php-cs-fixer fix --path-mode=intersection --config=.php_cs ./",
+    "analyse": "phpstan analyse"
   }
 }
