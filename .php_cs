@@ -125,8 +125,6 @@ $rules = [
 ];
 
 $finder = Finder::create()
-    ->notPath('bootstrap')
-    ->notPath('storage')
     ->notPath('vendor')
     ->in(getcwd())
     ->name('*.php')
