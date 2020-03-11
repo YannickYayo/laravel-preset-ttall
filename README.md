@@ -19,7 +19,7 @@ It comes with usefull packages and configurations :
 ## 1. Usage
 
 1. Fresh install Laravel >= 6.0 and `cd` to your app.
-2. Install this preset via `composer require yannickyayo/laravel-preset-ttall --dev`. Laravel will automatically discover this package. No need to register the service provider.
+2. Install this preset via `composer require yannickyayo/laravel-preset-ttall "^1.1" --dev`. Laravel will automatically discover this package. No need to register the service provider.
 
 ### a. For Presets without Authentication
 
