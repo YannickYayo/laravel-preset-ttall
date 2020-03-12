@@ -11,6 +11,13 @@ use Symfony\Component\Finder\SplFileInfo;
 class TtallPreset extends Preset
 {
     /**
+     * The current laravel version.
+     *
+     * @var string
+     */
+    const LARAVEL_VERSION = Str::startsWith(app()->version(), '6.') ? '6.x' : '7.x';
+
+    /**
      * Installation without auth scaffolding.
      */
     public static function install(): void
@@ -35,8 +42,11 @@ class TtallPreset extends Preset
     public static function installAuth(): void
     {
         static::install();
-        static::scaffoldController();
         static::scaffoldAuth();
+
+        if (self::LARAVEL_VERSION == '7.x') {
+            static::scaffoldController();
+        }
     }
 
     /**
@@ -241,13 +251,13 @@ class TtallPreset extends Preset
         copy(__DIR__.'/ttall-stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         copy(__DIR__.'/ttall-stubs/resources/js/app.js', resource_path('js/app.js'));
-        copy(__DIR__.'/ttall-stubs/resources/js/turbolinks.js', resource_path('js/turbolinks.js'));
         copy(__DIR__.'/ttall-stubs/resources/js/bootstrap.js', resource_path('js/bootstrap.js'));
+        copy(__DIR__.'/ttall-stubs/resources/js/turbolinks.js', resource_path('js/turbolinks.js'));
 
         copy(__DIR__.'/ttall-stubs/.eslintignore', base_path('.eslintignore'));
         copy(__DIR__.'/ttall-stubs/.eslintrc.json', base_path('.eslintrc.json'));
-        copy(__DIR__.'/ttall-stubs/.prettierrc', base_path('.prettierrc'));
         copy(__DIR__.'/ttall-stubs/.php_cs', base_path('.php_cs'));
+        copy(__DIR__.'/ttall-stubs/.prettierrc', base_path('.prettierrc'));
         copy(__DIR__.'/ttall-stubs/phpstan.neon', base_path('phpstan.neon'));
     }
 
@@ -322,10 +332,13 @@ class TtallPreset extends Preset
      */
     protected static function compileControllerStub(): string
     {
+        $template = file_get_contents(__DIR__.'/ttall-stubs/controllers/HomeController.stub');
+        $returnReplace = self::LARAVEL_VERSION == '6.x' ? '@return \Illuminate\Http\Response' : '@return \Illuminate\Contracts\Support\Renderable';
+
         return str_replace(
-            '{{namespace}}',
-            app()->getNamespace(),
-            file_get_contents(__DIR__.'/ttall-stubs/controllers/HomeController.stub')
+            ['{{namespace}}', '{{@return}}'],
+            [app()->getNamespace(), $returnReplace],
+            $template
         );
     }
 }
