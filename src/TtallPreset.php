@@ -11,13 +11,6 @@ use Symfony\Component\Finder\SplFileInfo;
 class TtallPreset extends Preset
 {
     /**
-     * The current laravel version.
-     *
-     * @var string
-     */
-    const LARAVEL_VERSION = Str::startsWith(app()->version(), '6.') ? '6.x' : '7.x';
-
-    /**
      * Installation without auth scaffolding.
      */
     public static function install(): void
@@ -41,10 +34,9 @@ class TtallPreset extends Preset
      */
     public static function installAuth(): void
     {
-        static::install();
         static::scaffoldAuth();
 
-        if (self::LARAVEL_VERSION == '7.x') {
+        if (self::getLaravelVersion() == '7.x') {
             static::scaffoldController();
         }
     }
@@ -81,6 +73,8 @@ class TtallPreset extends Preset
      */
     protected static function updateComposerScriptsArray(array $composer): array
     {
+        $test = self::getLaravelVersion() == '6.x' ? 'phpunit --colors=always --stop-on-defect' : '@php artisan test';
+
         return array_merge([
             'post-update-cmd' => [
                 'Illuminate\\Foundation\\ComposerScripts::postUpdate',
@@ -88,7 +82,7 @@ class TtallPreset extends Preset
                 '@php artisan ide-helper:models -W',
             ],
             'format' => 'php-cs-fixer fix --path-mode=intersection --config=.php_cs ./',
-            'test' => '@php artisan test',
+            'test' => $test,
             'analyse' => 'phpstan analyse',
         ], $composer);
     }
@@ -324,7 +318,19 @@ class TtallPreset extends Preset
             FILE_APPEND
         );
 
-        (new Filesystem)->copyDirectory(__DIR__.'/ttall-stubs/resources/views', resource_path('views'));
+        tap(new Filesystem, function ($filesystem) {
+            $filesystem->copyDirectory(__DIR__.'/ttall-stubs/resources/views', resource_path('views'));
+
+            if (self::getLaravelVersion() == '7.x') {
+                collect($filesystem->allFiles(base_path('vendor/laravel/ui/stubs/migrations')))
+                    ->each(function (SplFileInfo $file) use ($filesystem) {
+                        $filesystem->copy(
+                            $file->getPathname(),
+                            database_path('migrations/'.$file->getFilename())
+                        );
+                    });
+            }
+        });
     }
 
     /**
@@ -333,12 +339,22 @@ class TtallPreset extends Preset
     protected static function compileControllerStub(): string
     {
         $template = file_get_contents(__DIR__.'/ttall-stubs/controllers/HomeController.stub');
-        $returnReplace = self::LARAVEL_VERSION == '6.x' ? '@return \Illuminate\Http\Response' : '@return \Illuminate\Contracts\Support\Renderable';
+        $returnReplace = self::getLaravelVersion() == '6.x' ? '@return \Illuminate\Http\Response' : '@return \Illuminate\Contracts\Support\Renderable';
 
         return str_replace(
             ['{{namespace}}', '{{@return}}'],
             [app()->getNamespace(), $returnReplace],
             $template
         );
+    }
+
+    /**
+     * Get the current Laravel version.
+     *
+     * @return string
+     */
+    private static function getLaravelVersion(): string
+    {
+        return Str::startsWith(app()->version(), '6.') ? '6.x' : '7.x';
     }
 }
