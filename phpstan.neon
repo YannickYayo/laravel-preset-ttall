@@ -7,10 +7,6 @@ parameters:
     level: 5
 
     ignoreErrors:
-        - '#Function base_path not found.#'
-        - '#Function resource_path not found.#'
-        - '#Function public_path not found.#'
-        - '#Function app_path not found.#'
-        - '#Function app not found.#'
+        # - '#Function base_path not found.#'
 
     checkMissingIterableValueType: false

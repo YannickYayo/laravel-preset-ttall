@@ -34,9 +34,11 @@ class TtallPreset extends Preset
      */
     public static function installAuth(): void
     {
-        static::install();
-        static::scaffoldController();
         static::scaffoldAuth();
+
+        if (self::getLaravelVersion() == '7.x') {
+            static::scaffoldController();
+        }
     }
 
     /**
@@ -71,6 +73,8 @@ class TtallPreset extends Preset
      */
     protected static function updateComposerScriptsArray(array $composer): array
     {
+        $test = self::getLaravelVersion() == '6.x' ? 'phpunit --colors=always --stop-on-defect' : '@php artisan test';
+
         return array_merge([
             'post-update-cmd' => [
                 'Illuminate\\Foundation\\ComposerScripts::postUpdate',
@@ -78,7 +82,7 @@ class TtallPreset extends Preset
                 '@php artisan ide-helper:models -W',
             ],
             'format' => 'php-cs-fixer fix --path-mode=intersection --config=.php_cs ./',
-            'test' => '@php artisan test',
+            'test' => $test,
             'analyse' => 'phpstan analyse',
         ], $composer);
     }
@@ -241,13 +245,13 @@ class TtallPreset extends Preset
         copy(__DIR__.'/ttall-stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         copy(__DIR__.'/ttall-stubs/resources/js/app.js', resource_path('js/app.js'));
-        copy(__DIR__.'/ttall-stubs/resources/js/turbolinks.js', resource_path('js/turbolinks.js'));
         copy(__DIR__.'/ttall-stubs/resources/js/bootstrap.js', resource_path('js/bootstrap.js'));
+        copy(__DIR__.'/ttall-stubs/resources/js/turbolinks.js', resource_path('js/turbolinks.js'));
 
         copy(__DIR__.'/ttall-stubs/.eslintignore', base_path('.eslintignore'));
         copy(__DIR__.'/ttall-stubs/.eslintrc.json', base_path('.eslintrc.json'));
-        copy(__DIR__.'/ttall-stubs/.prettierrc', base_path('.prettierrc'));
         copy(__DIR__.'/ttall-stubs/.php_cs', base_path('.php_cs'));
+        copy(__DIR__.'/ttall-stubs/.prettierrc', base_path('.prettierrc'));
         copy(__DIR__.'/ttall-stubs/phpstan.neon', base_path('phpstan.neon'));
     }
 
@@ -314,7 +318,19 @@ class TtallPreset extends Preset
             FILE_APPEND
         );
 
-        (new Filesystem)->copyDirectory(__DIR__.'/ttall-stubs/resources/views', resource_path('views'));
+        tap(new Filesystem, function ($filesystem) {
+            $filesystem->copyDirectory(__DIR__.'/ttall-stubs/resources/views', resource_path('views'));
+
+            if (self::getLaravelVersion() == '7.x') {
+                collect($filesystem->allFiles(base_path('vendor/laravel/ui/stubs/migrations')))
+                    ->each(function (SplFileInfo $file) use ($filesystem) {
+                        $filesystem->copy(
+                            $file->getPathname(),
+                            database_path('migrations/'.$file->getFilename())
+                        );
+                    });
+            }
+        });
     }
 
     /**
@@ -322,10 +338,22 @@ class TtallPreset extends Preset
      */
     protected static function compileControllerStub(): string
     {
+        $template = file_get_contents(__DIR__.'/ttall-stubs/controllers/HomeController.stub');
+
         return str_replace(
-            '{{namespace}}',
-            app()->getNamespace(),
-            file_get_contents(__DIR__.'/ttall-stubs/controllers/HomeController.stub')
+            ['{{namespace}}', '{{@return}}'],
+            [app()->getNamespace(), '@return \Illuminate\Contracts\Support\Renderable'],
+            $template
         );
+    }
+
+    /**
+     * Get the current Laravel version.
+     *
+     * @return string
+     */
+    private static function getLaravelVersion(): string
+    {
+        return Str::startsWith(app()->version(), '6.') ? '6.x' : '7.x';
     }
 }

@@ -1,9 +1,16 @@
-# Laravel 7.0+ Frontend preset for The TTALL Stack
+# Laravel 6.x and 7.x Frontend preset for The TTALL Stack
 
 An opiniated Laravel front-end scaffolding preset for TTALL stack - Taiwlindcss | Turbolinks | Alpinejs | Laravel | Livewire.
 <br>
 
-### For Laravel < 7.0, please use the [1.x branch](https://github.com/YannickYayo/laravel-preset-ttall/tree/1.x)!
+<hr>
+
+### If you are using a previous version of this package (current version is 3.x), check the table below to find the right `README.md` file:
+
+| Version | Laravel Version | README link                                                                     |
+| ------- | --------------- | ------------------------------------------------------------------------------- |
+| ^2.0    | ^7.0            | [click](https://github.com/YannickYayo/laravel-preset-ttall/blob/3.x/README.md) |
+| ^1.0    | ^5.5\|^6.0      | [click](https://github.com/YannickYayo/laravel-preset-ttall/blob/1.x/README.md) |
 
 <hr>
 
@@ -18,24 +25,20 @@ It comes with usefull packages and their configurations files :
 
 ## 1. Usage
 
-1. Fresh install Laravel >= 7.0 and `cd` to your app.
+1. Fresh install Laravel >= 6.0 and `cd` to your app.
 2. Install this preset via `composer require yannickyayo/laravel-preset-ttall --dev`. Laravel will automatically discover this package. No need to register the service provider.
 
 ### a. For Presets without Authentication
 
 1. Use `php artisan ui ttall` for the basic preset
-2. `composer update`
-3. `php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"` to publish the Laravel Debugbar's config file
-4. `npm install && npm run dev`
-5. `php artisan serve` (or equivalent) to run server and test preset.
+2. `composer update && npm install && npm run dev`
+3. `php artisan serve` (or equivalent) to run server and test preset.
 
 ### b. For Presets with Authentication
 
 1. Use `php artisan ui ttall --auth` for the basic preset, auth route entry and auth views in one go. (NOTE: If you run this command several times, be sure to clean up the duplicate Auth entries in `routes/web.php`)
-2. `composer update`
-3. `php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"` to publish the Laravel Debugbar's config file
-4. `npm install && npm run dev`
-5. `php artisan serve` (or equivalent) to run server and test preset.
+2. `composer update && npm install && npm run dev`
+3. `php artisan serve` (or equivalent) to run server and test preset.
 
 ### Config
 
@@ -62,7 +65,7 @@ This should help with accessibility
 
 ### scripts
 
-A composer's script is added automatically to tell `Laravel IDE Helper` to rescan your `Facades` and `Models` files :
+A composer's script is added automatically to tell `Laravel IDE Helper` to rescan your `Facades` and `Models` files after every `composer update` :
 
 ```json
 "scripts":{
