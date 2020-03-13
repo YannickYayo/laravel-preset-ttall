@@ -339,11 +339,10 @@ class TtallPreset extends Preset
     protected static function compileControllerStub(): string
     {
         $template = file_get_contents(__DIR__.'/ttall-stubs/controllers/HomeController.stub');
-        $returnReplace = self::getLaravelVersion() == '6.x' ? '@return \Illuminate\Http\Response' : '@return \Illuminate\Contracts\Support\Renderable';
 
         return str_replace(
             ['{{namespace}}', '{{@return}}'],
-            [app()->getNamespace(), $returnReplace],
+            [app()->getNamespace(), '@return \Illuminate\Contracts\Support\Renderable'],
             $template
         );
     }

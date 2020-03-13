@@ -19,8 +19,7 @@ class TtallPresetServiceProvider extends ServiceProvider
 
                 $command->info('Ttall auth scaffolding installed successfully.');
             }
-            $command->info('Please run "composer update" to install the new composer\'s packages.');
-            $command->info('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+            $command->info('Please run "composer update && npm install && npm run dev" to install the new composer\'s packages and compile your fresh scaffolding.');
         });
 
         Paginator::defaultView('pagination::default');
