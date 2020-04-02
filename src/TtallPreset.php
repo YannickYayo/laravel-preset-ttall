@@ -158,7 +158,7 @@ class TtallPreset extends Preset
                 'laravel-mix-tailwind' => '^0.1.0',
                 'lodash' => '^4.17.13',
                 'tailwindcss' => '^1.2',
-                'alpinejs' => '^2.0',
+                'alpinejs' => '^2.2',
                 'turbolinks' => '^5.2.0',
             ], $packages);
         }
